@@ -4,7 +4,7 @@ const statusTag = document.getElementById('status-tag');
 
 const logOnScreen = (text) => {
   const textNode = document.createTextNode(text);
-  statusTag.appendChild(textNode);
+  statusTag.appendChild(`${textNode}\n\n`);
 };
 
 const registerServiceWorker = async () => {
