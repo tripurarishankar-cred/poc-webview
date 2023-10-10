@@ -7,6 +7,8 @@ const logOnScreen = (text) => {
   statusTag.appendChild(textNode);
 };
 
+logOnScreen('checking if js change works');
+
 const registerServiceWorker = async () => {
   if ('serviceWorker' in navigator) {
     logOnScreen('registering serviceWorker');
