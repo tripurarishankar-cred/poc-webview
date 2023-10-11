@@ -6,7 +6,8 @@ const addResourcesToCache = async (resources) => {
 };
 
 const clearPrevCache = async () => {
-  const promiseArr = CacheStorage.keys().map(cacheKey => CacheStorage.delete(cacheKey));
+  const keys = await CacheStorage.keys()
+  const promiseArr = keys.map(cacheKey => CacheStorage.delete(cacheKey));
   await Promise.all(promiseArr);
   return;
 };
