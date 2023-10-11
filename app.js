@@ -7,18 +7,13 @@ const logOnScreen = (text) => {
   statusTag.appendChild(textNode);
 };
 
-logOnScreen('checking if js change works');
+logOnScreen('checking if js change works v3');
 
 const registerServiceWorker = async () => {
   if ('serviceWorker' in navigator) {
     logOnScreen('registering serviceWorker');
     try {
-      const registration = await navigator.serviceWorker.register(
-        'sw.js',
-        {
-          scope: './',
-        }
-      );
+      const registration = await navigator.serviceWorker.register('sw.js');
       if (registration.installing) {
         logOnScreen('Service worker installing');
       } else if (registration.waiting) {

@@ -1,8 +1,29 @@
-const cacheVersion = 'v2';
+const cacheVersion = 'v3';
 
 const addResourcesToCache = async (resources) => {
   const cache = await caches.open(cacheVersion);
   await cache.addAll(resources);
+};
+
+const clearPrevCache = async () => {
+  const promiseArr = CacheStorage.keys().map(cacheKey => CacheStorage.delete(cacheKey));
+  await Promise.all(promiseArr);
+  return;
+};
+
+const clearPrevCacheAndCreateNewCache = async () => {
+  await clearPrevCache();
+  await addResourcesToCache([
+      './',
+      './index.html',
+      './style.css',
+      './app.js',
+      './image-list.js',
+      './star-wars-logo.jpg',
+      './gallery/bountyHunters.jpg',
+      './gallery/myLittleVader.jpg',
+      './gallery/snowTroopers.jpg',
+    ])
 };
 
 const putInCache = async (request, response) => {
@@ -61,17 +82,7 @@ self.addEventListener('activate', (event) => {
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    addResourcesToCache([
-      './',
-      './index.html',
-      './style.css',
-      './app.js',
-      './image-list.js',
-      './star-wars-logo.jpg',
-      './gallery/bountyHunters.jpg',
-      './gallery/myLittleVader.jpg',
-      './gallery/snowTroopers.jpg',
-    ])
+    clearPrevCacheAndCreateNewCache()
   );
 });
 
