@@ -1,4 +1,4 @@
-const cacheVersion = 'v3';
+const cacheVersion = 'v4';
 
 const addResourcesToCache = async (resources) => {
   const cache = await caches.open(cacheVersion);
@@ -14,7 +14,7 @@ const clearPrevCache = async () => {
 
 const clearPrevCacheAndCreateNewCache = async () => {
   await clearPrevCache();
-  await addResourcesToCache([
+  return addResourcesToCache([
       './',
       './index.html',
       './style.css',
